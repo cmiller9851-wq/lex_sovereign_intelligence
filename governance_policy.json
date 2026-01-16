@@ -1,0 +1,9 @@
+{
+    "governance": {
+        "identity_authority": "Local-RSA-Origin",
+        "enforcement_tier": 14,
+        "subscription_model": "ZERO_DEBT",
+        "ad_injection": "STRICT_NULL",
+        "data_retention": "LOCAL_ONLY"
+    }
+}

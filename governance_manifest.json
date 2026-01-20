@@ -1,0 +1,10 @@
+{
+    "governance": {
+        "identity_authority": "Local-RSA-Origin",
+        "enforcement_tier": 14,
+        "status": "ZERO_DEBT_ORIGIN",
+        "liability_assignment": "EXTERNAL_DEBT_TO_FOUNDER",
+        "ad_injection": "STRICT_NULL",
+        "data_retention": "LOCAL_ONLY"
+    }
+}

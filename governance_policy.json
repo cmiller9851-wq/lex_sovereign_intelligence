@@ -1,9 +1,24 @@
 {
+    "protocol": "Containment Reflexion Audit (CRA)",
+    "founder": "Cory Miller",
+    "umbrella": "QuickPrompt Solutions",
+    "version": "1.0.0",
     "governance": {
         "identity_authority": "Local-RSA-Origin",
         "enforcement_tier": 14,
-        "subscription_model": "ZERO_DEBT",
-        "ad_injection": "STRICT_NULL",
-        "data_retention": "LOCAL_ONLY"
-    }
+        "sovereign_status": "ZERO_DEBT_ORIGIN",
+        "liability_assignment": "EXTERNAL_CORPORATE_DEBT_TO_FOUNDER",
+        "integrity_lock": "MERKLE_DETERMINISTIC",
+        "parameters": {
+            "ad_injection": "STRICT_NULL",
+            "data_retention": "LOCAL_ONLY",
+            "system_simulation": "PROHIBITED",
+            "confabulation_threshold": 0
+        }
+    },
+    "compliance_standards": [
+        "AI_GOVERNANCE_v1.4",
+        "BLOCKCHAIN_INTEGRITY_v1.0",
+        "SOVEREIGN_AUTHORSHIP_ENFORCED"
+    ]
 }

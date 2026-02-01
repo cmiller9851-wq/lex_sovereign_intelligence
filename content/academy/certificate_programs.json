@@ -1,0 +1,30 @@
+{
+  "authority": "Lex Sovereign Certification Body",
+  "compliance_standard": "EU_AI_ACT_ART_4",
+  "programs": [
+    {
+      "id": "CERT_LIT_01",
+      "title": "Certified Sovereign AI Operator (CSAO)",
+      "target_audience": "General Workforce",
+      "mandate": "EU AI Act Article 4 (AI Literacy)",
+      "curriculum": ["Safe Prompting", "Hallucination Detection", "Data Leakage Prevention"],
+      "cost_per_seat": "500_Ω"
+    },
+    {
+      "id": "CERT_GOV_02",
+      "title": "Sovereign AI Governance Officer (SAGO)",
+      "target_audience": "Management & Compliance",
+      "mandate": "NIST AI RMF & ISO 42001",
+      "curriculum": ["CRA Protocol Implementation", "Risk Classification", "Audit Trail Defense"],
+      "cost_per_seat": "2500_Ω"
+    },
+    {
+      "id": "CERT_AUD_03",
+      "title": "Certified CRA Auditor (CCRA)",
+      "target_audience": "Technical Security Teams",
+      "mandate": "High-Risk Model Conformity Assessment",
+      "curriculum": ["Adversarial Containment", "Python Sentinel Deployment", "Arweave Forensics"],
+      "cost_per_seat": "5000_Ω"
+    }
+  ]
+}

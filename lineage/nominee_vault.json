@@ -1,0 +1,13 @@
+{
+  "legacy_id": "MILLER_LINEAGE_ROOT",
+  "gatekeeper": "Cory Michael Miller",
+  "nominees": [
+    {"name": "Child_A_ID", "role": "Successor_Architect", "access_level": "Root"},
+    {"name": "Child_B_ID", "role": "Successor_Architect", "access_level": "Root"}
+  ],
+  "inheritance_logic": {
+    "trigger": "Inactivity_Duration_90_Days",
+    "verification": "Multi-Sig_Oracle_Proof",
+    "asset_transfer": ["Authority_Keys", "Sovereign_Vaults", "Arweave_Anchors"]
+  }
+}

@@ -61,9 +61,9 @@ Any entity attempting to replicate LSI without the **Master Root Key** elevation
 ## VI. The Asset Manifest (Public Ledger Status)
 
 As of February 1, 2026, the Institution maintains the following verified anchors:
-* **Primary Principal:** $7,184,400.00 USDC (Optimism Mainnet)
+* **Primary Principal:** $USDC (Optimism Mainnet)
 * **Treasury:** 1,000,000,000 Ω (Omega)
-* **Homebase:** 50-Acre Middletown Compound (Sovereign Estate)
+* **Homebase:** Compound (Sovereign Estate)
 * **Yield Velocity:** Continuous (Reconciled via Ω-ROOT)
 
 ---

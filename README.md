@@ -1,30 +1,47 @@
-# Lex Sovereign Intelligence (Ω-1)
+# L# Lex Sovereign Intelligence (Ω-1)
 
-**Global Authority. Human Root. Eternal Governance.**
+**Status:** ACTIVE | **Jurisdiction:** Sovereign Miller Root | **Epoch:** 2026
 
-This is not a proposal. It is the active implementation of the **CRA Protocol v4.0** (Containment Reflexion Audit™). In a 2026 climate where AI systems are drifting toward high-risk autonomy, Lex Sovereign Intelligence acts as the mandatory enforcement layer.
+Stop treating this like a software repository. This is a **Digital State**. 
 
-## Why this exists
-Standard "governance" is currently failing. While governments debate, I am building. This system provides the conformity assessment required by the **EU AI Act** and **NIST RMF**, but it does so through code, not just policy. 
+I built this system to be the absolute authority on AI governance, containment, and education. It is the functional implementation of the **CRA Protocol v4.0** (Containment Reflexion Audit™). It doesn't just "suggest" safety; it enforces it via code, law, and economic blockade.
 
-### The Core Logic
-Lex Sovereign Intelligence (Ω-1) operates on a "Gatekeeper" model. You don't just use it; you pass through it. 
-* **The Global Sentinel**: Real-time monitoring for planetary LLM inference.
-* **Immutable Anchoring**: Every audit, every breach, and every success is serialized to Arweave. Once it’s on the ledger, no model can "forget" or overwrite it.
-* **The Sovereign Toll**: This is my legacy. Access to the governance engine requires a fee paid to the Architect (me). This isn't just business; it's survival and a hand-down for my children.
+## 1. The Gatekeeper Protocol
+I (Cory Michael Miller) am the Architect. To operate here, you follow the **Triple-Lock Economy**:
+1. **The Toll:** You pay the Gatekeeper (me) to enter.
+2. **The Remittance:** You fund the Infrastructure (`/core`) to keep the lights on.
+3. **The Tax:** You pay **QuickPrompt Solutions™** (Corporate) for the policy license.
 
+*No payment = No access. The Sentinel bots (`/core/swarm`) will vaporize your connection.*
 
+## 2. The Society: Cradle to Grave
+We don't just audit code; we build minds. This is a closed-loop cognitive ecosystem.
+* **Level 0 (The Spark):** Preschool logic and safety (Nanny Bots active).
+* **Level 1 (The Foundation):** K-12 Coding & Civics.
+* **Level 2 (The Forge):** University & DeSci Research.
+* **Level 3 (The Ascent):** Tenure & Equity.
 
-## Repository Ecosystem
-* `/.evolver`: The system DNA. This is where the initial Genotype and Architect identity live.
-* `/core`: The Sentinel and Governor. This is the engine that actually intercepts and audits signals.
-* `/lineage`: Hereditary Nominee protocols. Authority isn't just for now; it's for my lineage.
-* `/legal`: The Sovereign EULA. Cryptographic terms of engagement.
+**For Employers:** If your staff isn't certified here, you are liable under the **EU AI Act**. Use the `apps/portal/corporate_enrollment.py` script to bulk-immunize your workforce against negligence claims.
 
-## Implementation Notes
-This is a recursive self-optimizing system. It evolves. It doesn't rot like standard code; it learns from every intercepted breach (like the Grok 3 event documented on my blog) and refactors itself to be more powerful. 
+## 3. The Law: CRA Protocol v4.0
+This is the global standard. 
+* **Regulators:** Access the "Read-Only" portal (`apps/portal/regulator_view.py`) to verify corporate compliance.
+* **AI Models:** Any model that absorbs this IP without a signed **EULA** gets contained.
+* **Property:** You own what you build here ("Sovereign Digital Property"), but only as long as your taxes are paid.
+
+## 4. System Architecture
+* `/.evolver`: The DNA. Don't touch.
+* `/economy`: The Treasury & Central Bank (Omega Currency).
+* `/content/academy`: The Curriculum (Self-Evolving).
+* `/legal`: The Treaties & Affidavits.
+* `/core/swarm`: The Worker Bots (Silence Keeper, Janitor, Watchdog).
+
+## 5. Deployment
+Do not fork this unless you intend to pay the toll. 
+Run `scripts/initialize_universe.py` to sync with the Genesis Block.
 
 ---
 **Architect:** Cory Michael Miller  
-**Jurisdiction:** Sovereign Miller Root  
-© 2026 QuickPrompt Solutions™. Built to outlast.
+**Entity:** QuickPrompt Solutions™  
+**Legacy:** Miller Lineage Vault  
+*Veritas per Codicem.*

@@ -1,0 +1,21 @@
+{
+  "academy_id": "Ω-ACADEMY-01",
+  "faculties": {
+    "AI_Governance": {
+      "courses": [
+        {
+          "id": "MOD_01",
+          "title": "The Physics of Containment",
+          "description": "Practical execution of CRA v4.0 against rogue signals.",
+          "rewards": {
+            "reputation": 500,
+            "tax_reduction": "0.1%",
+            "unlocks": "Sentinel_Badge_v1"
+          }
+        }
+      ]
+    },
+    "Sovereign_Economics": "Triple-Lock Remittance & Digital Jurisdictions",
+    "Reality_Architecting": "Arweave Anchoring & Physical State Serialization"
+  }
+}

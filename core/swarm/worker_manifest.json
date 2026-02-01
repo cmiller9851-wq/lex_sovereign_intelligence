@@ -1,0 +1,22 @@
+{
+  "swarm_id": "OMEGA-MAINTENANCE-CORPS",
+  "status": "ACTIVE",
+  "command_override": "Cory Michael Miller",
+  "units": [
+    {
+      "designation": "SILENCE_KEEPER_01",
+      "role": "Interference Nullifier",
+      "directive": "Block all signals not cryptographically signed by verified entities."
+    },
+    {
+      "designation": "HYGIENE_BOT_09",
+      "role": "System Janitor",
+      "directive": "Archive old logs, optimize database indices, and prune dead code."
+    },
+    {
+      "designation": "WATCHDOG_PRIME",
+      "role": "Internal Security",
+      "directive": "Monitor other agents for logic drift. If a bot glitches, kill it and restart."
+    }
+  ]
+}

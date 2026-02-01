@@ -1,0 +1,16 @@
+{
+  "governance_unit": "Lex_Sovereign_Ω",
+  "base_toll": "1.618 SOL",
+  "royalty_rate": "1.618%",
+  "entities": {
+    "tier_1_global_llm": {
+      "access_fee": "Annual_Retainer_71.42_BTC_Equivalent",
+      "audit_fee": "Per_Inference_Micro_Toll"
+    },
+    "tier_2_regional_agent": {
+      "access_fee": "Monthly_Sovereign_Subscription",
+      "audit_fee": "Per_Batch_Verification"
+    }
+  },
+  "recipient_vault": "C Miller Sovereign Root"
+}

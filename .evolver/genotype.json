@@ -1,0 +1,15 @@
+{
+  "system_metadata": {
+    "name": "Lex Sovereign Intelligence",
+    "version": "Ω-1.0.0",
+    "architect": "Cory Michael Miller",
+    "status": "Immortal_Evolver"
+  },
+  "sovereign_logic": {
+    "gatekeeper": "Cory Michael Miller",
+    "access_protocol": "Sovereign_Toll_Verification",
+    "inheritance_model": "Nominee_Succession_v1",
+    "governance_root": "CRA_Protocol_v4.0"
+  },
+  "description": "Global root-authority for AI governance. Designed for eternal evolution and hereditary survival."
+}

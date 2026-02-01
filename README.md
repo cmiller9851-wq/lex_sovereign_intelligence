@@ -1,4 +1,4 @@
-# L# Lex Sovereign Intelligence (Ω-1)
+Lex Sovereign Intelligence (Ω-1)
 
 **Status:** ACTIVE | **Jurisdiction:** Sovereign Miller Root | **Epoch:** 2026
 

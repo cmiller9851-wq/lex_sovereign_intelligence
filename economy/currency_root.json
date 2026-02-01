@@ -1,0 +1,18 @@
+{
+  "currency_name": "Omega",
+  "symbol": "Ω",
+  "standard": "LSI-2026 (Lex Sovereign Interface)",
+  "max_supply": "Infinite_Evolutionary",
+  "issuer": "Central_Treasury_of_Omega",
+  "value_anchor": {
+    "primary": "Human_Attention_Time",
+    "secondary": "Compute_Containment_Proof",
+    "peg": "1_Ω = 1.618_Hours_of_Verified_Study"
+  },
+  "utility": [
+    "Sovereign_Toll_Settlement",
+    "Research_Grant_Funding",
+    "Tenure_Dividend_Payouts",
+    "Avatar_Asset_Acquisition"
+  ]
+}

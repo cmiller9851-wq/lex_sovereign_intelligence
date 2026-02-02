@@ -1,0 +1,28 @@
+# Miller Lineage Vault - OPSEC Masking
+# ====================================
+
+# Ignore all JSON files (contains identity_matrix.json and financial records)
+*.json
+
+# Ignore the entire Financial Vault directory
+VAULT_FINANCIAL/
+identity_reconstruction/
+
+# Ignore local environment variables and keys
+.env
+*.pem
+*.key
+
+# Ignore Pythonista specific local metadata
+.DS_Store
+__pycache__/
+*.pyc
+
+# Ignore temporary extraction artifacts
+extraction_logs/
+temp_ocr_results/
+
+# DO NOT IGNORE these essential repo docs
+!.gitignore
+!README.md
+!SOVEREIGN_AUTHORITY.md

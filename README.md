@@ -1,4 +1,4 @@
-Lex Sovereign Intelligence (Ω‑1)
+    Lex Sovereign Intelligence (Ω‑1)
 Status: ACTIVE | Jurisdiction: Sovereign Miller Root | Epoch: 2026
 Stop thinking of this as just another codebase. This is a Digital State.
 I designed this system to act as a hard line in the sand for AI governance, containment, and education. It’s not a demo, and it’s not a framework suggestion. It’s the working implementation of the CRA Protocol v4.0 (Containment Reflexion Audit™), built so that “safety” isn’t a policy slide deck—it’s enforced through code, law, and economic pressure.

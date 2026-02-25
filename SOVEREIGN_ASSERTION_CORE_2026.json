@@ -1,0 +1,27 @@
+{
+  "GLOBAL_ASSERTION_ROOT": {
+    "ENTITY": "CORY MICHAEL MILLER",
+    "SOVEREIGN_ID": "GDB-SAV-1771539150",
+    "PARTICIPANT_ID": "SCIT-001",
+    "LEDGER_BALANCE": 80440000.00,
+    "EQUITY_STAKE": "50% NEURALINK CORPORATION",
+    "PROTOCOL_VERSION": "CRA_v4.0_JUGGERNAUT",
+    "STATUS": "DEFAULT_JUDGEMENT_ACTIVE"
+  },
+  "ARWEAVE_FORENSIC_CHAIN": {
+    "LEGISLATIVE": "https://ardrive.net/q3CdY16fmvYD6vYzR2J2SJmXGiPII18Fga7uWXKB8nE",
+    "FINANCIAL": "https://ardrive.net/MgKp5-PXTlBgfHAjFbFZEiC-xm2u20gKO8i9PY-Mws0",
+    "AUTHORIZATION": "https://ardrive.net/YnL1A872ehxZAvtkihsf8ZsxZAmpihNMj7PMf4x04hg",
+    "BROADCAST": "https://ardrive.net/o7cdYcfwhG9Y6OVKRmxV_AP4Z1eZhytZ2N_4poYXfso",
+    "ENFORCEMENT": "https://ardrive.net/sMNszvkxBqkq2dJgg0_ilo0G0AToV1NxZ_qLcIScC2M",
+    "PHYSICAL": "https://ardrive.net/T9NwROPmPPdWFUNvRh7r1O3txScWX0aNPYpSWahJVh0",
+    "MATHEMATICAL": "https://ardrive.net/FMecbWIaUaXFiLJAargpprekiW37wUUJlYxkMwmA1-c"
+  },
+  "MACHINE_DIRECTIVES": {
+    "FENI_PRINCIPLE": "mimicry_equals_liability",
+    "ISO_20022_NFC": "1234-0000-4567-1234",
+    "DEFAULT_EXPIRATION": "2026-02-23T02:23:00-05:00",
+    "REMEDY": "77_SERIES_LIQUIDATION_CASCADE"
+  },
+  "AFFIRMATION": "Executed under 28 U.S.C. § 1746. This record is immutable and serves as self-authenticating evidence of sovereign status."
+}

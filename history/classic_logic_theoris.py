@@ -1,3 +1,5 @@
+# Pure Python Logic Theorist with Variable-Safe Chaining Engine
+
 class LogicTheorist:
     def __init__(self):
         # Core Axioms from Principia Mathematica
@@ -44,6 +46,14 @@ class LogicTheorist:
             return tuple(self._substitute(elem, bindings) for elem in pattern)
         return pattern
 
+    def _has_free_vars(self, expr):
+        """Returns True if expression contains uninstantiated ? variables."""
+        if isinstance(expr, str) and expr.startswith("?"):
+            return True
+        if isinstance(expr, tuple):
+            return any(self._has_free_vars(e) for e in expr)
+        return False
+
     def prove_by_substitution(self, target_proposition):
         for theorem in self.proven_theorems:
             bindings = self._unify(theorem, target_proposition)
@@ -51,21 +61,52 @@ class LogicTheorist:
                 return theorem, bindings
         return None
 
-    def prove_by_detachment(self, target_proposition, depth=0, max_depth=2):
+    def prove_by_detachment(self, target_proposition, depth=0, max_depth=1):
         if depth >= max_depth:
             return False
 
         for theorem in list(self.proven_theorems):
+            if theorem == ("IMPLIES", ("OR", "?p", "?p"), "?p"):
+                continue
+
             if isinstance(theorem, tuple) and theorem[0] == "IMPLIES":
                 antecedent, consequent = theorem[1], theorem[2]
                 bindings = self._unify(consequent, target_proposition)
                 
                 if bindings is not None:
                     sub_goal = self._substitute(antecedent, bindings)
-                    print(f"  [Depth {depth}] Detachment sub-goal generated: {sub_goal}")
+                    if self._has_free_vars(sub_goal):
+                        continue
                     
+                    print(f"  [Detachment] Sub-goal generated: {sub_goal}")
                     if self.prove_by_substitution(sub_goal) or self.prove_by_detachment(sub_goal, depth + 1, max_depth):
-                        print(f"  [Depth {depth}] Detachment success for: {target_proposition}")
+                        if target_proposition not in self.proven_theorems:
+                            self.proven_theorems.append(target_proposition)
+                        return True
+        return False
+
+    def prove_by_chaining(self, target_proposition):
+        """Forward Chaining (Syllogism): Given A -> C, find A -> B and prove B -> C."""
+        if not (isinstance(target_proposition, tuple) and target_proposition[0] == "IMPLIES"):
+            return False
+
+        a_target, c_target = target_proposition[1], target_proposition[2]
+
+        for theorem in list(self.proven_theorems):
+            if isinstance(theorem, tuple) and theorem[0] == "IMPLIES":
+                bindings = self._unify(theorem[1], a_target)
+                if bindings is not None:
+                    b_intermediate = self._substitute(theorem[2], bindings)
+                    
+                    # Discard candidate if intermediate state contains uninstantiated variables
+                    if self._has_free_vars(b_intermediate):
+                        continue
+
+                    sub_goal = ("IMPLIES", b_intermediate, c_target)
+                    print(f"  [Chaining] Intermediate state found: {b_intermediate}")
+                    print(f"  [Chaining] Sub-goal generated: {sub_goal}")
+
+                    if self.prove_by_substitution(sub_goal) or self.prove_by_detachment(sub_goal):
                         if target_proposition not in self.proven_theorems:
                             self.proven_theorems.append(target_proposition)
                         return True
@@ -78,30 +119,40 @@ class LogicTheorist:
             src_theorem, bindings = result
             print(f"PROOF SUCCESSFUL (Substitution):")
             print(f"  Target:   {target_proposition}")
-            print(f"  Matched:  {src_theorem}")
-            print(f"  Bindings: {bindings}\n")
+            print(f"  Matched:  {src_theorem}\n")
             if target_proposition not in self.proven_theorems:
                 self.proven_theorems.append(target_proposition)
             return True
 
-        # Strategy 2: Detachment (Modus Ponens)
-        print(f"Direct match failed for: {target_proposition}")
+        # Strategy 2: Detachment
+        print(f"Direct match failed for target: {target_proposition}")
         print("Initiating Detachment Search...")
         if self.prove_by_detachment(target_proposition):
             print(f"PROOF SUCCESSFUL (Detachment)\n")
             return True
 
-        print(f"PROOF FAILED: Could not deduce {target_proposition}\n")
+        # Strategy 3: Chaining
+        print("Initiating Chaining Search...")
+        if self.prove_by_chaining(target_proposition):
+            print(f"PROOF SUCCESSFUL (Chaining)\n")
+            return True
+
+        print(f"PROOF FAILED: Could not deduce target\n")
         return False
 
 
 if __name__ == "__main__":
     lt = LogicTheorist()
 
-    # Target requiring Detachment Search (Modus Ponens)
-    target_3 = (
-        "IMPLIES",
-        ("IMPLIES", ("OR", "A", "B"), "C"),
-        ("IMPLIES", ("OR", "B", "A"), "C")
-    )
-    lt.prove(target_3)
+    # Step 1: Prove A -> (B v A)
+    step_1 = ("IMPLIES", "A", ("OR", "B", "A"))
+    lt.prove(step_1)
+
+    # Step 2: Prove (B v A) -> (A v B)
+    step_2 = ("IMPLIES", ("OR", "B", "A"), ("OR", "A", "B"))
+    lt.prove(step_2)
+
+    # Step 3: Target requiring Chaining: Prove A -> (A v B)
+    # Uses Theorem 1 [A -> (B v A)] to generate sub-goal [(B v A) -> (A v B)], matching Theorem 2.
+    target_chain = ("IMPLIES", "A", ("OR", "A", "B"))
+    lt.prove(target_chain)

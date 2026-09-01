@@ -1,0 +1,4 @@
+SUCCESS (Substitution): ('IMPLIES', ('OR', 'A', 'C'), ('OR', 'C', 'A'))
+SUCCESS (Substitution): ('IMPLIES', ('OR', 'C', 'B'), ('OR', 'B', 'C'))
+SUCCESS (Chaining): ('IMPLIES', ('IMPLIES', 'A', 'B'), ('IMPLIES', ('OR', 'A', 'C'), ('OR', 'B', 'C')))
+

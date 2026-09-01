@@ -1,0 +1,14 @@
+PROOF SUCCESSFUL (Substitution):
+  Target:   ('IMPLIES', 'A', ('OR', 'B', 'A'))
+  Matched:  ('IMPLIES', '?q', ('OR', '?p', '?q'))
+
+PROOF SUCCESSFUL (Substitution):
+  Target:   ('IMPLIES', ('OR', 'B', 'A'), ('OR', 'A', 'B'))
+  Matched:  ('IMPLIES', ('OR', '?p', '?q'), ('OR', '?q', '?p'))
+
+Direct match failed for target: ('IMPLIES', 'A', ('OR', 'A', 'B'))
+Initiating Detachment Search...
+Initiating Chaining Search...
+  [Chaining] Intermediate state found: ('OR', 'B', 'A')
+  [Chaining] Sub-goal generated: ('IMPLIES', ('OR', 'B', 'A'), ('OR', 'A', 'B'))
+PROOF SUCCESSFUL (Chaining)

@@ -1,18 +1,21 @@
 class LogicTheorist:
+    """A zero-dependency, pure Python symbolic inference engine 
+    modeled after the 1955-1956 Logic Theorist (Newell, Simon, Shaw).
+    """
     def __init__(self):
-        # Axioms from Principia Mathematica
         self.axioms = [
-            ("IMPLIES", ("OR", "?p", "?p"), "?p"),                      # Axiom 1.2
-            ("IMPLIES", "?q", ("OR", "?p", "?q")),                      # Axiom 1.3
-            ("IMPLIES", ("OR", "?p", "?q"), ("OR", "?q", "?p")),          # Axiom 1.4
+            ("IMPLIES", ("OR", "?p", "?p"), "?p"),                      # Axiom 1.2: (p v p) -> p
+            ("IMPLIES", "?q", ("OR", "?p", "?q")),                      # Axiom 1.3: q -> (p v q)
+            ("IMPLIES", ("OR", "?p", "?q"), ("OR", "?q", "?p")),          # Axiom 1.4: (p v q) -> (q v p)
             ("IMPLIES", 
                 ("IMPLIES", "?p", "?q"), 
                 ("IMPLIES", ("OR", "?r", "?p"), ("OR", "?r", "?q"))
-            )                                                           # Axiom 1.6
+            )                                                           # Axiom 1.6: (p -> q) -> ((r v p) -> (r v q))
         ]
         self.proven_theorems = list(self.axioms)
 
     def _unify(self, pattern, expr, bindings=None):
+        """Unifies a pattern containing variables (?p) against an expression."""
         if bindings is None:
             bindings = {}
 
@@ -38,6 +41,7 @@ class LogicTheorist:
         return bindings if pattern == expr else None
 
     def _substitute(self, pattern, bindings):
+        """Applies variable bindings to a logical expression tree."""
         if isinstance(pattern, str) and pattern.startswith("?"):
             return bindings.get(pattern, pattern)
         if isinstance(pattern, tuple):
@@ -45,6 +49,7 @@ class LogicTheorist:
         return pattern
 
     def _has_free_vars(self, expr):
+        """Detects uninstantiated pattern variables."""
         if isinstance(expr, str) and expr.startswith("?"):
             return True
         if isinstance(expr, tuple):
@@ -52,13 +57,17 @@ class LogicTheorist:
         return False
 
     def prove_by_substitution(self, target_proposition):
+        """Heuristic Method 1: Direct Axiom Matching & Substitution."""
         for theorem in self.proven_theorems:
             bindings = self._unify(theorem, target_proposition)
             if bindings is not None:
                 return theorem, bindings
         return None
 
-    def prove_by_detachment(self, target_proposition, depth=0, max_depth=1):
+    def prove_by_detachment(self, target_proposition, depth=0, max_depth=3, path=None):
+        """Heuristic Method 2: Modus Ponens Detachment with Cycle Protection."""
+        if path is None:
+            path = set()
         if depth >= max_depth:
             return False
 
@@ -72,82 +81,115 @@ class LogicTheorist:
                 
                 if bindings is not None:
                     sub_goal = self._substitute(antecedent, bindings)
-                    if self._has_free_vars(sub_goal):
+                    if self._has_free_vars(sub_goal) or sub_goal in path:
                         continue
                     
-                    print(f"  [Detachment] Sub-goal generated: {sub_goal}")
-                    if self.prove_by_substitution(sub_goal) or self.prove_by_detachment(sub_goal, depth + 1, max_depth):
+                    new_path = path | {sub_goal}
+                    if self.prove_by_substitution(sub_goal) or \
+                       self.prove_by_detachment(sub_goal, depth + 1, max_depth, new_path) or \
+                       self.prove_by_chaining(sub_goal, depth + 1, max_depth, new_path):
                         if target_proposition not in self.proven_theorems:
                             self.proven_theorems.append(target_proposition)
                         return True
         return False
 
-    def prove_by_chaining(self, target_proposition):
+    def prove_by_chaining(self, target_proposition, depth=0, max_depth=3, path=None):
+        """Heuristic Method 3: Bidirectional Chaining & Transitivity."""
+        if path is None:
+            path = set()
+        if depth >= max_depth:
+            return False
+
         if not (isinstance(target_proposition, tuple) and target_proposition[0] == "IMPLIES"):
             return False
 
         a_target, c_target = target_proposition[1], target_proposition[2]
 
+        # Mode 1: Top-Level Implication Transitivity
         for theorem in list(self.proven_theorems):
             if isinstance(theorem, tuple) and theorem[0] == "IMPLIES":
                 bindings = self._unify(theorem[1], a_target)
                 if bindings is not None:
                     b_intermediate = self._substitute(theorem[2], bindings)
                     if self._has_free_vars(b_intermediate):
-                        continue
+                        extra_bindings = self._unify(theorem[2], c_target, bindings.copy())
+                        if extra_bindings is not None:
+                            b_intermediate = self._substitute(theorem[2], extra_bindings)
 
                     sub_goal = ("IMPLIES", b_intermediate, c_target)
-                    print(f"  [Chaining] Intermediate state: {b_intermediate}")
-                    print(f"  [Chaining] Sub-goal generated: {sub_goal}")
+                    if not self._has_free_vars(b_intermediate) and sub_goal not in path:
+                        new_path = path | {sub_goal}
+                        if self.prove_by_substitution(sub_goal) or \
+                           self.prove_by_detachment(sub_goal, depth + 1, max_depth, new_path) or \
+                           self.prove_by_chaining(sub_goal, depth + 1, max_depth, new_path):
+                            if target_proposition not in self.proven_theorems:
+                                self.proven_theorems.append(target_proposition)
+                            return True
 
-                    if self.prove_by_substitution(sub_goal) or self.prove_by_detachment(sub_goal):
-                        if target_proposition not in self.proven_theorems:
-                            self.proven_theorems.append(target_proposition)
-                        return True
+        # Mode 2: Nested Implication Chaining H -> (X -> Y)
+        if isinstance(c_target, tuple) and c_target[0] == "IMPLIES":
+            x_target, y_target = c_target[1], c_target[2]
+            for theorem in list(self.proven_theorems):
+                if isinstance(theorem, tuple) and theorem[0] == "IMPLIES":
+                    # Left Chaining (X -> M)
+                    bl = self._unify(theorem[1], x_target)
+                    if bl is not None:
+                        m = self._substitute(theorem[2], bl)
+                        sub_goal = ("IMPLIES", a_target, ("IMPLIES", m, y_target))
+                        if not self._has_free_vars(m) and sub_goal not in path:
+                            new_path = path | {sub_goal}
+                            if self.prove_by_substitution(sub_goal) or \
+                               self.prove_by_detachment(sub_goal, depth + 1, max_depth, new_path) or \
+                               self.prove_by_chaining(sub_goal, depth + 1, max_depth, new_path):
+                                if target_proposition not in self.proven_theorems:
+                                    self.proven_theorems.append(target_proposition)
+                                return True
+
+                    # Right Chaining (M -> Y)
+                    br = self._unify(theorem[2], y_target)
+                    if br is not None:
+                        m = self._substitute(theorem[1], br)
+                        sub_goal = ("IMPLIES", a_target, ("IMPLIES", x_target, m))
+                        if not self._has_free_vars(m) and sub_goal not in path:
+                            new_path = path | {sub_goal}
+                            if self.prove_by_substitution(sub_goal) or \
+                               self.prove_by_detachment(sub_goal, depth + 1, max_depth, new_path) or \
+                               self.prove_by_chaining(sub_goal, depth + 1, max_depth, new_path):
+                                if target_proposition not in self.proven_theorems:
+                                    self.proven_theorems.append(target_proposition)
+                                return True
         return False
 
     def prove(self, target_proposition):
-        result = self.prove_by_substitution(target_proposition)
-        if result:
-            src_theorem, bindings = result
-            print(f"PROOF SUCCESSFUL (Substitution):")
-            print(f"  Target:  {target_proposition}")
-            print(f"  Matched: {src_theorem}\n")
+        """Orchestrates heuristic search layers to prove target propositions."""
+        res = self.prove_by_substitution(target_proposition)
+        if res:
+            print(f"SUCCESS (Substitution): {target_proposition}")
             if target_proposition not in self.proven_theorems:
                 self.proven_theorems.append(target_proposition)
             return True
 
-        print(f"Direct match failed for target: {target_proposition}")
-        print("Initiating Detachment Search...")
-        if self.prove_by_detachment(target_proposition):
-            print(f"PROOF SUCCESSFUL (Detachment)\n")
+        initial_path = {target_proposition}
+        if self.prove_by_detachment(target_proposition, path=initial_path):
+            print(f"SUCCESS (Detachment): {target_proposition}")
             return True
 
-        print("Initiating Chaining Search...")
-        if self.prove_by_chaining(target_proposition):
-            print(f"PROOF SUCCESSFUL (Chaining)\n")
+        if self.prove_by_chaining(target_proposition, path=initial_path):
+            print(f"SUCCESS (Chaining): {target_proposition}")
             return True
 
-        print(f"PROOF FAILED: Could not deduce target\n")
+        print(f"FAILED: {target_proposition}")
         return False
 
 
 if __name__ == "__main__":
     lt = LogicTheorist()
 
-    print("--- Test 1: Direct Summation Schema (Axiom 1.6) ---")
-    target_1_6 = (
-        "IMPLIES",
-        ("IMPLIES", "A", "B"),
-        ("IMPLIES", ("OR", "C", "A"), ("OR", "C", "B"))
-    )
-    lt.prove(target_1_6)
-
-    print("--- Test 2: Pre-requisite Commutative Transformations ---")
+    # Pre-requisite Commutative Lemmata
     lt.prove(("IMPLIES", ("OR", "A", "C"), ("OR", "C", "A")))
     lt.prove(("IMPLIES", ("OR", "C", "B"), ("OR", "B", "C")))
 
-    print("--- Test 3: Right-Sided Disjunction Target ---")
+    # Target: Right-Sided Disjunction
     target_right = (
         "IMPLIES",
         ("IMPLIES", "A", "B"),
